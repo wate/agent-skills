@@ -4,12 +4,12 @@ agent-skills
 概要
 -------------------------
 
-AIエージェント向けのスキルを公開するリポジトリです。
+AIエージェント向けのスキルを公開するリポジトリです。  
 自作スキルのうち汎用的に利用できるものを、順次公開しています。
 
-スキルは`SKILL.md`と付属ファイルで構成される再利用可能な指示セットです。
-エージェントはタスクの内容に応じて、必要なスキルだけを読み込みます。
-形式はオープン標準の[Agent Skills](https://agentskills.io/)に準拠しているため、
+スキルは`SKILL.md`と付属ファイルで構成される再利用可能な指示セットです。  
+エージェントはタスクの内容に応じて、必要なスキルだけを読み込みます。  
+形式はオープン標準の[Agent Skills](https://agentskills.io/)に準拠しているため、  
 GitHub Copilot、Claude Code、Codex、Cursorなどの複数のエージェントで利用できます。
 
 収録スキル
@@ -17,7 +17,8 @@ GitHub Copilot、Claude Code、Codex、Cursorなどの複数のエージェン�
 
 ### handoff
 
-進行中の作業の進捗・未決事項・課題をMarkdown形式で構造化し、次のセッションで即座に再開できる引き継ぎ資料を生成します。
+進行中の作業の進捗・未決事項・課題をMarkdown形式で構造化し、  
+次のセッションで即座に再開できる引き継ぎ資料を生成します。
 
 読み込みのトリガーは次のとおりです。
 
@@ -38,6 +39,11 @@ GitHub Copilot、Claude Code、Codex、Cursorなどの複数のエージェン�
 - `タスクを分解したい`や`WBSで整理したい`と依頼したとき
 
 スキルの仕様は[`skills/workplan/SKILL.md`](skills/workplan/SKILL.md)に記載しています。
+
+チケット駆動の開発と相性がよく、[MD-Ticket](https://github.com/wate/MD-Ticket)を使えば簡単に始められます。  
+チケットがテキストファイルなので、MCPの設定なしでAIがそのまま読み込めます。
+
+MCPなどを利用すればBacklogやRedmineなどのプロジェクト管理ツールでも同じように進められます。
 
 インストール
 -------------------------
@@ -62,10 +68,10 @@ npx skills add wate/agent-skills --global
 npx skills add wate/agent-skills --agent claude-code
 ```
 
-対話形式では、配置先(プロジェクトまたは個人)と方式(シンボリックリンクまたはコピー)を選択します。
+対話形式では、配置先(プロジェクトまたは個人)と方式(シンボリックリンクまたはコピー)を選択します。  
 確認を省略する場合は`-y`を付けます。
 
-スキルのディレクトリをエージェントの配置先へ直接コピーする方法もあります。
+スキルのディレクトリをエージェントの配置先へ直接コピーする方法もあります。  
 配置先はエージェントごとに異なります。
 
 | エージェント      | プロジェクト      | 個人                 |
@@ -88,28 +94,6 @@ npx skills add wate/agent-skills --agent claude-code
 
 - `/handoff`
 - `/workplan`
-
-リポジトリ構成
--------------------------
-
-```text
-.
-├── LICENSE
-├── README.md
-└── skills/
-    ├── handoff/
-    │   ├── SKILL.md
-    │   ├── assets/
-    │   └── references/
-    └── workplan/
-        ├── SKILL.md
-        └── assets/
-```
-
-各スキルは`SKILL.md`を必須とし、必要に応じて以下のディレクトリを持ちます。
-
-- `assets/`: 出力に利用するテンプレート
-- `references/`: 手順の詳細、チェックリスト、記述例
 
 ライセンス
 -------------------------
