@@ -1,0 +1,12 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "node .github/skills/feedback/scripts/vscode-copilot/session-start.mjs",
+        "cwd": ".",
+        "timeout": 5
+      }
+    ]
+  }
+}
