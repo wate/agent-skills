@@ -45,6 +45,61 @@ GitHub Copilot、Claude Code、Codex、Cursorなどの複数のエージェン�
 
 MCPなどを利用すればBacklogやRedmineなどのプロジェクト管理ツールでも同じように進められます。
 
+### refine
+
+ドキュメントや指示の記述を7つの検証観点で点検し、詰めの甘さを検出して、  
+意味が一意に伝わる記述へ書き直します。  
+検証できない完了条件、曖昧な動詞、複合操作、暗黙の前提などを検出します。
+
+読み込みのトリガーは次のとおりです。
+
+- `リファインして`や`記述を詰めて`と依頼したとき
+- `曖昧な指示を具体化して`や`完了条件を具体化して`と依頼したとき
+
+読み取り専用の点検や評価だけを依頼した場合は読み込みません。  
+対象ファイルを書き換えますが、確認なしで反映するのは機械的に改善できる箇所だけです。  
+判断が必要な箇所は、1つずつ質問してから反映します。
+
+スキルの仕様は[`skills/refine/SKILL.md`](skills/refine/SKILL.md)に記載しています。
+
+### feedback
+
+AIへの是正指摘、決定事項、外部の参照先などを記録し、セッションをまたいで想起させます。  
+記録は`.github/feedback/`へ1件1ファイルで保存し、索引`index.md`から必要なものだけを読み込みます。
+
+読み込みのトリガーは次のとおりです。
+
+- 指摘や訂正をしたとき
+- 決定事項や制約が判明したとき
+- 参照先のURLやチケットを渡したとき
+- `これを記憶しておいて`と依頼したとき
+
+記録を次のセッションで想起させるには、索引をセッションへ読み込ませる設定が必要です。
+
+- VS Code Copilot Chat: 記録を保存するときに、スキルがSessionStartフックの登録状態を確認します
+    - 未登録なら、登録してよいかを1回だけ確認し、承認されると`.github/hooks/feedback.json`を作成します
+    - VS Codeを再起動するか、フック設定を再読み込みすると有効になります
+- opencode: `instructions`設定へ索引を登録するスクリプトを同梱しています
+- そのほかのエージェント: `AGENTS.md`へ、セッション開始時に索引を確認する指示を追記します
+
+スクリプトは、プロジェクトのルートで実行します。  
+次の例は`.agents/skills/`へインストールした場合です。インストール先に合わせてパスを読み替えます。
+
+```bash
+# VS Code Copilot Chat: SessionStartフックを登録する
+node .agents/skills/feedback/scripts/vscode-copilot/setup-hook.mjs
+
+# opencode: instructions設定へ索引を登録する
+node .agents/skills/feedback/scripts/opencode/setup-instructions.mjs
+```
+
+フックの登録は、スキルをプロジェクトへインストールした場合だけ対応しています。  
+`--global`でインストールした場合は登録しません。  
+`.github/hooks/`はリポジトリで共有する設定のため、個人環境のパスを書き込まないためです。
+
+スキルの仕様は[`skills/feedback/SKILL.md`](skills/feedback/SKILL.md)に、  
+エージェントごとの設定手順は[`skills/feedback/references/recall-integration.md`](skills/feedback/references/recall-integration.md)に記載しています。
+
 インストール
 -------------------------
 
@@ -89,11 +144,15 @@ npx skills add wate/agent-skills --agent claude-code
 
 - `引き継ぎ資料を作って`
 - `作業プランを作って`
+- `この作業プランをリファインして`
+- `これを記憶しておいて`
 
 チャット入力欄でスラッシュコマンドを入力すると、明示的に呼び出せます。
 
 - `/handoff`
 - `/workplan`
+- `/refine`
+- `/feedback`
 
 ライセンス
 -------------------------
