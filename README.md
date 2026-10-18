@@ -15,6 +15,23 @@ GitHub Copilot、Claude Code、Codex、Cursorなどの複数のエージェン�
 収録スキル
 -------------------------
 
+### agent-guide
+
+プロジェクトの構成・ツールキット・ドキュメントの実在を確かめ、  
+AIエージェントが最初に読むオンボーディング文書`AGENTS.md`を生成します。  
+全体像と進め方の導線だけを書き、詳細なルールは専門ドキュメントへ委ねます。
+
+読み込みのトリガーは次のとおりです。
+
+- `AGENTS.mdを作って`と依頼したとき
+- `AGENTS.mdを更新して`と依頼したとき
+- `AGENTS.md`がないプロジェクトで作業するとき
+
+プロジェクト種別をシステム開発系と非開発系(業務改善等)に判定し、種別ごとの出力例へ当てはめて生成します。  
+参照先は生成前に実在を確認し、存在しないファイルやディレクトリはリンクしません。
+
+スキルの仕様は[`skills/agent-guide/SKILL.md`](skills/agent-guide/SKILL.md)に記載しています。
+
 ### handoff
 
 進行中の作業の進捗・未決事項・課題をMarkdown形式で構造化し、  
@@ -150,6 +167,7 @@ npx skills add wate/agent-skills --agent claude-code
 
 依頼内容が`description`の条件に一致すると、エージェントがスキルを自動で読み込みます。
 
+- `AGENTS.mdを作って`
 - `引き継ぎ資料を作って`
 - `作業プランを作って`
 - `この作業プランをリファインして`
@@ -157,6 +175,7 @@ npx skills add wate/agent-skills --agent claude-code
 
 チャット入力欄でスラッシュコマンドを入力すると、明示的に呼び出せます。
 
+- `/agent-guide`
 - `/handoff`
 - `/workplan`
 - `/refine`
