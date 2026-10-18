@@ -25,6 +25,7 @@ GitHub Copilot、Claude Code、Codex、Cursorなどの複数のエージェン�
 - `引き継ぎ資料を作って`と依頼したとき
 - `handoff`と指定したとき
 - 作業の中断やセッション切り替えのとき
+- 会話が長期化し、以前の文脈を参照しにくくなったとき(セッション切り替えと引き継ぎを提案)
 
 スキルの仕様は[`skills/handoff/SKILL.md`](skills/handoff/SKILL.md)に記載しています。
 
@@ -36,6 +37,7 @@ GitHub Copilot、Claude Code、Codex、Cursorなどの複数のエージェン�
 
 - `作業プランを作って`と依頼したとき
 - `workplan`と指定したとき
+- `実施計画を整理したい`や`進め方を整理したい`と依頼したとき
 - `タスクを分解したい`や`WBSで整理したい`と依頼したとき
 
 スキルの仕様は[`skills/workplan/SKILL.md`](skills/workplan/SKILL.md)に記載しています。
@@ -64,7 +66,8 @@ MCPなどを利用すればBacklogやRedmineなどのプロジェクト管理ツ
 
 ### feedback
 
-AIへの是正指摘、決定事項、外部の参照先などを記録し、セッションをまたいで想起させます。  
+AIへの是正指摘、決定事項、外部の参照先などを4カテゴリーに分類して記録し、  
+セッションをまたいで想起させます。  
 記録は`.github/feedback/`へ1件1ファイルで保存し、索引`index.md`から必要なものだけを読み込みます。
 
 読み込みのトリガーは次のとおりです。
@@ -73,6 +76,7 @@ AIへの是正指摘、決定事項、外部の参照先などを記録し、セ
 - 決定事項や制約が判明したとき
 - 参照先のURLやチケットを渡したとき
 - `これを記憶しておいて`と依頼したとき
+- 記録の精査や集計を依頼したとき
 
 記録を次のセッションで想起させるには、索引をセッションへ読み込ませる設定が必要です。
 
@@ -96,6 +100,10 @@ node .agents/skills/feedback/scripts/opencode/setup-instructions.mjs
 フックの登録は、スキルをプロジェクトへインストールした場合だけ対応しています。  
 `--global`でインストールした場合は登録しません。  
 `.github/hooks/`はリポジトリで共有する設定のため、個人環境のパスを書き込まないためです。
+
+`.github/feedback/`の記録がたまると(目安20件)、保存時に精査を提案します。  
+承認すると、原本へ反映済みの記録を洗い出す集計レポートを生成します。  
+集計手順は[`skills/feedback/references/report.md`](skills/feedback/references/report.md)に記載しています。
 
 スキルの仕様は[`skills/feedback/SKILL.md`](skills/feedback/SKILL.md)に、  
 エージェントごとの設定手順は[`skills/feedback/references/recall-integration.md`](skills/feedback/references/recall-integration.md)に記載しています。
