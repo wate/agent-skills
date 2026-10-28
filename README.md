@@ -81,6 +81,24 @@ MCPなどを利用すればBacklogやRedmineなどのプロジェクト管理ツ
 
 スキルの仕様は[`skills/refine/SKILL.md`](skills/refine/SKILL.md)に記載しています。
 
+### annotate-code
+
+ソースコードのクラス・関数・メソッド・プロパティに、言語の標準形式のドキュメントコメントを追加・改善します。  
+コードの動作は変えず、静的解析の前後比較と差分の確認で検証します。  
+PHP、JavaScript・TypeScript、Python、Ruby、Goの書式に対応しています。
+
+読み込みのトリガーは次のとおりです。
+
+- `アノテーションを付けて`と依頼したとき
+- `Docコメントを書いて`と依頼したとき
+- `PHPDocを整えて`や`JSDocを追加して`と依頼したとき
+
+説明文は、規約が別の言語を指定していない限り日本語で書きます。  
+プロジェクトの規約と既存コードの書き方を優先し、どちらからも決まらない点だけをスキルの規則で補います。
+
+スキルの仕様は[`skills/annotate-code/SKILL.md`](skills/annotate-code/SKILL.md)に、  
+言語別の書式は[`skills/annotate-code/references/`](skills/annotate-code/references/)に記載しています。
+
 ### feedback
 
 AIへの是正指摘、決定事項、外部の参照先などを4カテゴリーに分類して記録し、  
@@ -171,6 +189,7 @@ npx skills add wate/agent-skills --agent claude-code
 - `引き継ぎ資料を作って`
 - `作業プランを作って`
 - `この作業プランをリファインして`
+- `関数にアノテーションを付けて`
 - `これを記憶しておいて`
 
 チャット入力欄でスラッシュコマンドを入力すると、明示的に呼び出せます。
@@ -179,6 +198,7 @@ npx skills add wate/agent-skills --agent claude-code
 - `/handoff`
 - `/workplan`
 - `/refine`
+- `/annotate-code`
 - `/feedback`
 
 ライセンス
