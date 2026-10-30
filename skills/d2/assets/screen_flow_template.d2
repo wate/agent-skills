@@ -1,0 +1,108 @@
+# 画面遷移図テンプレート(記入例つき)
+# =========================
+# 機能概要: {機能名}(対象に置き換える)
+# 使い方: 本ファイルの記入例をコピーし、画面名・遷移・ラベルを対象へ置き換える
+# 構成: レイアウト設定 -> 変数定義 -> ノード定義 -> エッジ定義 -> スタイル定義
+# 画面種別: 通常画面はclassなし、モーダルはpage_modal、処理のみはpage_process、外部はpage_external
+# 遷移種別: 通常遷移は実線、自動遷移はact_redirect、その場更新はact_inplace
+
+## レイアウト設定
+## -------------------------
+direction: right
+
+## レイアウトエンジンとテーマの定義
+## -------------------------
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 0
+  }
+}
+
+## ノード定義(記入例: 商品管理機能)
+## -------------------------
+商品一覧
+商品詳細
+商品登録
+商品編集
+
+削除確認: {
+  class: page_modal
+}
+
+削除完了: {
+  class: page_process
+}
+
+製品元ページ: {
+  class: page_external
+  label: "製品元ページ\n(外部)"
+}
+
+## エッジ定義
+## -------------------------
+商品一覧 -> 商品詳細: 商品を選択
+商品一覧 -> 商品登録: 新規作成
+
+商品詳細 -> 商品編集: 編集ボタン
+商品詳細 -> 削除確認: 削除ボタン
+商品詳細 -> 製品元ページ: 製品元へ
+商品詳細 -> 商品一覧: 戻る
+
+商品登録 -> 商品登録: バリデーションエラー
+商品登録 -> 商品一覧: 登録完了
+商品登録 -> 商品一覧: キャンセル
+
+商品編集 -> 商品編集: バリデーションエラー
+商品編集 -> 商品詳細: 保存成功
+商品編集 -> 商品一覧: キャンセル
+
+削除確認 -> 削除完了: 削除確認
+削除確認 -> 商品詳細: キャンセル
+
+削除完了 -> 商品一覧: {
+  class: act_redirect
+}
+
+## スタイル定義
+## -------------------------
+classes: {
+  page_modal: {
+    shape: rectangle
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#CCCCCC"
+      stroke-width: 5
+      font-size: 14
+    }
+  }
+  page_process: {
+    shape: rectangle
+    style: {
+      stroke-dash: 3
+      fill: "#FAFAFA"
+      stroke: "#333333"
+      font-size: 14
+    }
+  }
+  page_external: {
+    shape: rectangle
+    style: {
+      stroke-dash: 3
+      stroke: "#1E88E5"
+      fill: "#E3F2FD"
+      font-size: 14
+    }
+  }
+  act_redirect: {
+    style: {
+      stroke-dash: 3
+    }
+  }
+  act_inplace: {
+    style: {
+      stroke: "#8E24AA"
+      stroke-dash: 6
+    }
+  }
+}

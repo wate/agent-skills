@@ -1,0 +1,66 @@
+# UMLクラス図テンプレート
+# =========================
+# 目的: クラスの構造と関係を示す
+# 対象: 開発チーム
+
+## レイアウトエンジンとテーマの定義
+## -------------------------
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 0
+  }
+}
+
+## クラス定義
+## -------------------------
+User: {
+  class: uml_class
+  label: "User"
+  fields: |
+    + id: int
+    + name: string
+    - email: string
+  methods: |
+    + login(password: string): bool
+    + logout(): void
+}
+
+Profile: {
+  class: uml_class
+  label: "Profile"
+  fields: |
+    + user_id: int
+    + bio: string
+  methods: |
+    + updateBio(bio: string): void
+}
+
+Order: {
+  class: uml_class
+  label: "Order"
+  fields: |
+    + id: int
+    + user_id: int
+    + total: decimal
+  methods: |
+    + calculateTotal(): decimal
+}
+
+## 関係定義
+## -------------------------
+User -> Profile: 1..1
+User -> Order: 1..*
+
+## スタイル定義
+## -------------------------
+classes: {
+  uml_class: {
+    shape: class
+    style: {
+      fill: "#ffffff"
+      stroke: "#333333"
+      font-size: 14
+    }
+  }
+}

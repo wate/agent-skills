@@ -1,0 +1,59 @@
+# ER図テンプレート
+# =========================
+# 目的: データモデルの概要を示す
+# 対象: 開発チーム、関係者
+
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 0
+  }
+}
+
+users: {
+  class: entity
+  label: "users"
+  id: "INT (PK)"
+  name: "VARCHAR(100)"
+  created: "DATETIME"
+}
+
+orders: {
+  class: entity
+  label: "orders"
+  id: "INT (PK)"
+  user_id: "INT (FK)"
+  total: "DECIMAL(10,2)"
+  created: "DATETIME"
+}
+
+order_items: {
+  class: entity
+  label: "order_items"
+  id: "INT (PK)"
+  order_id: "INT (FK)"
+  product_id: "INT (FK)"
+  quantity: "INT"
+}
+
+users -> orders: 1:N {
+  style: {
+    stroke-dash: 3
+  }
+}
+
+orders -> order_items: 1:N {
+  style: {
+    stroke-dash: 3
+  }
+}
+
+classes: {
+  entity: {
+    shape: sql_table
+    style: {
+      fill: "#e1d5e7"
+      stroke: "#9673a6"
+    }
+  }
+}

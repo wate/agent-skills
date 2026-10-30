@@ -1,0 +1,199 @@
+# シーケンス図テンプレート
+# =========================
+# 用途: システム設計・業務プロセスのシーケンス表現
+
+## シーケンス図の宣言
+## -------------------------
+shape: sequence_diagram
+
+## レイアウトエンジンとテーマの定義
+## -------------------------
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 0
+  }
+}
+
+## アクター/コンポーネントの定義
+## -------------------------
+# 使用するアクターを定義してください
+# システム用と業務用の両パターンを用意しています
+
+# システムシーケンス図の場合
+user: ユーザー {
+  class: user
+}
+
+frontend: フロントエンド {
+  class: app
+}
+
+api_server: APIサーバー {
+  class: app
+}
+
+database: データベース {
+  class: database
+}
+
+external_service: 外部サービス {
+  class: external_system
+}
+
+# 業務シーケンス図の場合（システム用を削除して以下を使用）
+# 申請者: {
+#   label: "田中（申請者）"
+#   class: person_actor
+# }
+#
+# 承認者: {
+#   label: "山田部長"
+#   class: person_actor
+# }
+#
+# 経理部: {
+#   label: "経理部"
+#   class: department
+# }
+#
+# 管理システム: {
+#   label: "ワークフローシステム"
+#   class: business_system
+# }
+#
+# 外部組織: {
+#   label: "取引先"
+#   class: external_org
+# }
+
+## シーケンスの定義
+## -------------------------
+# システムシーケンスの例
+user -> frontend: ユーザー操作
+frontend -> api_server: "POST /api/endpoint\n{param1, param2}"
+
+api_server -> database: "SELECT data\nWHERE condition = ?"
+database -> api_server: データ取得
+
+api_server -> external_service: 外部API呼び出し
+external_service -> api_server: API応答
+
+api_server -> database: "INSERT INTO table\nVALUES (...)"
+database -> api_server: 登録完了
+
+api_server -> frontend: "200 OK\n{result}"
+frontend -> user: 結果表示
+
+# 業務シーケンスの例（システム用を削除して以下を使用）
+# 申請者 -> 管理システム: "申請書入力" {
+#   class: request
+# }
+#
+# 管理システム -> 承認者: "承認依頼通知" {
+#   class: notification
+# }
+#
+# 承認者 -> 管理システム: "承認" {
+#   class: approval
+# }
+#
+# 管理システム -> 申請者: "承認通知" {
+#   class: notification
+# }
+#
+# 管理システム -> 経理部: "処理依頼通知" {
+#   class: notification
+# }
+#
+# 経理部 -> 管理システム: "処理完了登録" {
+#   class: request
+# }
+#
+# 経理部 -> 申請者: "完了通知" {
+#   class: report
+# }
+
+## スタイル定義
+## -------------------------
+classes: {
+  # システムシーケンス図用
+  user: {
+    shape: person
+    style: {
+      fill: lightblue
+    }
+  }
+  app: {
+    shape: rectangle
+    style: {
+      fill: lightgreen
+    }
+  }
+  database: {
+    shape: cylinder
+    style: {
+      fill: lightyellow
+    }
+  }
+  external_system: {
+    shape: cloud
+    style: {
+      fill: lightgray
+    }
+  }
+
+  # 業務シーケンス図用
+  person_actor: {
+    shape: person
+    style: {
+      fill: lightblue
+    }
+  }
+  department: {
+    shape: rectangle
+    style: {
+      fill: lightgreen
+    }
+  }
+  business_system: {
+    shape: cylinder
+    style: {
+      fill: lightgray
+    }
+  }
+  external_org: {
+    shape: cloud
+    style: {
+      fill: lightyellow
+    }
+  }
+
+  # 業務メッセージ種別（業務シーケンス図で使用）
+  request: {
+    style: {
+      font-size: 12
+      stroke: blue
+    }
+  }
+  approval: {
+    style: {
+      font-size: 12
+      stroke: green
+    }
+  }
+  report: {
+    style: {
+      font-size: 12
+      stroke: orange
+      stroke-dash: 3
+    }
+  }
+  notification: {
+    style: {
+      font-size: 10
+      stroke: gray
+      stroke-dash: 5
+    }
+  }
+}

@@ -99,6 +99,25 @@ PHP、JavaScript・TypeScript、Python、Ruby、Goの書式に対応していま
 スキルの仕様は[`skills/annotate-code/SKILL.md`](skills/annotate-code/SKILL.md)に、  
 言語別の書式は[`skills/annotate-code/references/`](skills/annotate-code/references/)に記載しています。
 
+### d2
+
+D2言語形式の図表ファイル(`.d2`)の作成・読み取り・編集を行います。  
+ノード・エッジ・コンテナの構文、レイアウトエンジン(dagre・ELK・TALA)の選択基準、  
+スタイル設定を規則化し、図種別ごとのテンプレートと生成手順を提供します。
+
+読み込みのトリガーは次のとおりです。
+
+- `D2で図を作って`と依頼したとき
+- `.d2`ファイルの作成・編集・読み取りを依頼したとき
+- `テキストベースの図表`や`画面遷移図`、`シーケンス図`、`フローチャート`、`アクティビティ図`、`ER図`に言及したとき
+
+フローチャート、シーケンス図、画面遷移図、アクティビティ図、ER図、UMLクラス図、ユースケース図のテンプレートを同梱しています。  
+図はテンプレートを読み込んでから書き、出力後は`d2 validate`で構文を検証します。  
+サイズや位置はレイアウトエンジンに任せ、`width`・`height`・`near`の使用を作図の目的に限定しています。
+
+スキルの仕様は[`skills/d2/SKILL.md`](skills/d2/SKILL.md)に、  
+テンプレートは[`skills/d2/assets/`](skills/d2/assets/)、機能別のリファレンスは[`skills/d2/references/`](skills/d2/references/)に記載しています。
+
 ### feedback
 
 AIへの是正指摘、決定事項、外部の参照先などを4カテゴリーに分類して記録し、  
@@ -190,6 +209,7 @@ npx skills add wate/agent-skills --agent claude-code
 - `作業プランを作って`
 - `この作業プランをリファインして`
 - `関数にアノテーションを付けて`
+- `D2で画面遷移図を作って`
 - `これを記憶しておいて`
 
 チャット入力欄でスラッシュコマンドを入力すると、明示的に呼び出せます。
@@ -199,6 +219,7 @@ npx skills add wate/agent-skills --agent claude-code
 - `/workplan`
 - `/refine`
 - `/annotate-code`
+- `/d2`
 - `/feedback`
 
 ライセンス

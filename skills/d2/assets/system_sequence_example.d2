@@ -1,0 +1,96 @@
+# ユーザー認証システムのシーケンス図
+# =========================
+# システム設計: フロントエンド→APIサーバー→認証サービス→データベースの連携フロー
+
+## シーケンス図の宣言
+## -------------------------
+shape: sequence_diagram
+
+## コンポーネントの定義
+## -------------------------
+user: ユーザー {
+  class: user
+}
+frontend: フロントエンド {
+  class: app
+}
+api_server: APIサーバー {
+  class: app
+}
+auth_service: 認証サービス {
+  class: app
+}
+user_db: ユーザーDB {
+  class: database
+}
+session_cache: セッションキャッシュ {
+  class: database
+}
+email_service: メール送信サービス {
+  class: external
+}
+
+## シーケンスの定義
+## -------------------------
+# ユーザー認証フローの処理順序
+user -> frontend: ログインフォーム入力
+frontend -> api_server: "POST /api/auth/login\n{email, password}"
+
+api_server -> auth_service: 認証リクエスト
+auth_service -> user_db: "SELECT user_info\nWHERE email = ?"
+user_db -> auth_service: ユーザー情報取得
+
+auth_service -> auth_service: パスワード検証
+auth_service -> session_cache: "SET session_token\nEXPIRE 3600"
+session_cache -> auth_service: セッション保存完了
+
+auth_service -> api_server: 認証成功レスポンス
+api_server -> frontend: "200 OK\n{token, user_info}"
+frontend -> user: ログイン成功画面表示
+
+# 2段階認証フロー（オプション）
+api_server -> email_service: "2FA コード送信\n{email, verification_code}"
+email_service -> user: 認証コードメール送信
+user -> frontend: 認証コード入力
+frontend -> api_server: "POST /api/auth/verify-2fa\n{token, code}"
+api_server -> auth_service: 2FAコード検証
+auth_service -> api_server: 検証結果
+api_server -> frontend: 認証完了
+
+## レイアウトエンジンとテーマの定義
+## -------------------------
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 0
+  }
+}
+
+## スタイル定義
+## -------------------------
+classes: {
+  user: {
+    shape: person
+    style: {
+      fill: lightblue
+    }
+  }
+  app: {
+    shape: rectangle
+    style: {
+      fill: lightgreen
+    }
+  }
+  database: {
+    shape: cylinder
+    style: {
+      fill: lightyellow
+    }
+  }
+  external: {
+    shape: cloud
+    style: {
+      fill: lightgray
+    }
+  }
+}
