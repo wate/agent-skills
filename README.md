@@ -32,6 +32,41 @@ AIエージェントが最初に読むオンボーディング文書`AGENTS.md`�
 
 スキルの仕様は[`skills/agent-guide/SKILL.md`](skills/agent-guide/SKILL.md)に記載しています。
 
+### project-overview
+
+プロジェクトの全体像を伝える`README.md`とプロジェクトブリーフを作成・更新します。  
+READMEはソフトウェア開発向けと業務改善向けで構成を変え、新規作成と既存更新の両方に対応します。
+
+読み込みのトリガーは次のとおりです。
+
+- `READMEを作って`と依頼したとき
+- `プロジェクト概要をまとめて`と依頼したとき
+- `プロジェクトブリーフを更新して`と依頼したとき
+
+設定ファイルや既存文書から確認できた事実だけを書き、推測した内容は「要確認」と明記します。  
+既存文書を更新するときは、生成案との差分を示し、承認を得てから反映します。
+
+スキルの仕様は[`skills/project-overview/SKILL.md`](skills/project-overview/SKILL.md)に、  
+テンプレートは[`skills/project-overview/assets/`](skills/project-overview/assets/)に記載しています。
+
+### project-docs
+
+プロジェクトの基準文書として、技術スタック`technology.md`、  
+ディレクトリ構造`directory_structure.md`、コーディング規約`code_style.md`を作成・更新します。
+
+読み込みのトリガーは次のとおりです。
+
+- `技術スタックを更新して`と依頼したとき
+- `ディレクトリ構造を整理して`と依頼したとき
+- `コーディング規約を作って`と依頼したとき
+
+設定ファイルとディレクトリを事実の起点とし、設定に書かれていないルールや技術は追加しません。  
+依頼で指定された文書だけを更新し、既存文書がある場合は差分を示して承認を得てから反映します。
+
+スキルの仕様は[`skills/project-docs/SKILL.md`](skills/project-docs/SKILL.md)に、  
+テンプレートは[`skills/project-docs/assets/`](skills/project-docs/assets/)、  
+収集手順は[`skills/project-docs/references/`](skills/project-docs/references/)に記載しています。
+
 ### handoff
 
 進行中の作業の進捗・未決事項・課題をMarkdown形式で構造化し、  
@@ -117,6 +152,27 @@ D2言語形式の図表ファイル(`.d2`)の作成・読み取り・編集を�
 
 スキルの仕様は[`skills/d2/SKILL.md`](skills/d2/SKILL.md)に、  
 テンプレートは[`skills/d2/assets/`](skills/d2/assets/)、機能別のリファレンスは[`skills/d2/references/`](skills/d2/references/)に記載しています。
+
+### drawio
+
+draw.io XML形式の図表ファイル(`.drawio`、`.xml`)の作成・読み取り・編集と、  
+PNG・SVG・PDFへのエクスポートを行います。  
+`mxfile`・`mxCell`の構造を扱い、スイムレーン図、業務フロー図、ER図、画面イメージ(ワイヤーフレーム)の  
+サンプルと、機能別のリファレンスを提供します。
+
+読み込みのトリガーは次のとおりです。
+
+- `draw.io`や`drawio`、`diagrams.net`に言及したとき
+- `.drawio`ファイルの作成・編集・読み取りを依頼したとき
+- `スイムレーン図`や`業務フロー図`、`ワークフロー図`、`ワイヤーフレーム`、`画面イメージ`に言及したとき
+
+形式の指定がない場合は、AIやツールがテキストとして読む図は`d2`、人間が図として見る図は本スキルと判定します。  
+読み手も判断できない場合は、推測せずユーザーへ確認します。  
+XMLの編集だけならdraw.io本体は不要で、構文検証には`xmllint`を使います。  
+エクスポートにはdraw.ioデスクトップアプリ(`--export`オプション)が必要です。
+
+スキルの仕様は[`skills/drawio/SKILL.md`](skills/drawio/SKILL.md)に、  
+サンプルは[`skills/drawio/assets/`](skills/drawio/assets/)、機能別のリファレンスは[`skills/drawio/references/`](skills/drawio/references/)に記載しています。
 
 ### feedback
 
@@ -210,6 +266,9 @@ npx skills add wate/agent-skills --agent claude-code
 - `この作業プランをリファインして`
 - `関数にアノテーションを付けて`
 - `D2で画面遷移図を作って`
+- `drawioで業務フロー図を作って`
+- `READMEを作って`
+- `技術スタックを更新して`
 - `これを記憶しておいて`
 
 チャット入力欄でスラッシュコマンドを入力すると、明示的に呼び出せます。
@@ -220,6 +279,9 @@ npx skills add wate/agent-skills --agent claude-code
 - `/refine`
 - `/annotate-code`
 - `/d2`
+- `/drawio`
+- `/project-overview`
+- `/project-docs`
 - `/feedback`
 
 ライセンス

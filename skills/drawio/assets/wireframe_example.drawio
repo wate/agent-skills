@@ -1,0 +1,290 @@
+<mxfile host="app.diagrams.net" modified="2026-10-31T00:00:00.000Z" agent="AI" etag="sample-wireframe">
+  <diagram id="list" name="顧客一覧">
+    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1320" pageHeight="540" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" value="画面" parent="0" />
+        <mxCell id="list-note" value="注記" parent="0" />
+
+        <!-- ページの背景(注記の余白が透けないようにする) -->
+        <mxCell id="list-page-bg" value="" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1320" height="540" as="geometry" />
+        </mxCell>
+
+        <!-- 画面の骨格 -->
+        <mxCell id="list-bg" value="" style="rounded=0;html=1;fillColor=#F5F7FA;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1040" height="540" as="geometry" />
+        </mxCell>
+        <mxCell id="list-header" value="顧客管理システム" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=16;fontStyle=1;align=left;spacingLeft=16;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1040" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="list-header-user" value="山田 太郎" style="text;html=1;fontColor=#6B7280;fontSize=13;align=right;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="880" y="13" width="140" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- サイドメニュー -->
+        <mxCell id="list-sidebar" value="" style="rounded=0;html=1;fillColor=#1E293B;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="56" width="200" height="484" as="geometry" />
+        </mxCell>
+        <mxCell id="list-menu1" value="ダッシュボード" style="text;html=1;fontColor=#CBD5E1;fontSize=13;align=left;verticalAlign=middle;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="0" y="72" width="200" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="list-menu2" value="顧客一覧" style="rounded=0;html=1;fillColor=#2563EB;strokeColor=none;fontColor=#FFFFFF;fontSize=13;align=left;verticalAlign=middle;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="0" y="112" width="200" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="list-menu3" value="顧客登録" style="text;html=1;fontColor=#CBD5E1;fontSize=13;align=left;verticalAlign=middle;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="0" y="152" width="200" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- 画面タイトル -->
+        <mxCell id="list-title" value="顧客一覧" style="text;html=1;fontColor=#1F2937;fontSize=20;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="232" y="72" width="300" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- 検索条件のカード -->
+        <mxCell id="list-card-search" value="検索条件" style="rounded=1;absoluteArcSize=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;shadow=1;fontColor=#1F2937;fontSize=14;fontStyle=1;align=left;verticalAlign=top;spacingLeft=16;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="232" y="120" width="776" height="124" as="geometry" />
+        </mxCell>
+        <mxCell id="list-label-name" value="顧客名" style="text;html=1;fontColor=#374151;fontSize=12;align=left;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="256" y="156" width="240" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="list-input-name" value="例: 株式会社サンプル" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#9CA3AF;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="256" y="180" width="240" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="list-label-staff" value="担当者" style="text;html=1;fontColor=#374151;fontSize=12;align=left;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="516" y="156" width="200" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="list-select-staff" value="すべて" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="516" y="180" width="200" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="list-select-staff-arrow" value="" style="triangle;direction=south;html=1;fillColor=#6B7280;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="692" y="195" width="10" height="6" as="geometry" />
+        </mxCell>
+        <mxCell id="list-btn-clear" value="クリア" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#374151;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="796" y="180" width="88" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="list-btn-search" value="検索" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#2563EB;strokeColor=#2563EB;fontColor=#FFFFFF;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="896" y="180" width="88" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- 一覧のカード -->
+        <mxCell id="list-card-list" value="顧客一覧(3件)" style="rounded=1;absoluteArcSize=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;shadow=1;fontColor=#1F2937;fontSize=14;fontStyle=1;align=left;verticalAlign=top;spacingLeft=16;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="232" y="264" width="776" height="252" as="geometry" />
+        </mxCell>
+        <mxCell id="list-btn-new" value="新規登録" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#2563EB;strokeColor=#2563EB;fontColor=#FFFFFF;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="896" y="276" width="88" height="32" as="geometry" />
+        </mxCell>
+
+        <!-- 一覧の表 -->
+        <mxCell id="list-th-code" value="顧客コード" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#E5E7EB;fontColor=#374151;fontSize=12;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="256" y="324" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="list-th-name" value="顧客名" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#E5E7EB;fontColor=#374151;fontSize=12;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="376" y="324" width="260" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="list-th-staff" value="担当者" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#E5E7EB;fontColor=#374151;fontSize=12;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="636" y="324" width="140" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="list-th-updated" value="更新日" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#E5E7EB;fontColor=#374151;fontSize=12;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="776" y="324" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="list-th-action" value="操作" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#E5E7EB;fontColor=#374151;fontSize=12;fontStyle=1;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="896" y="324" width="88" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r1-code" value="C-0001" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="256" y="360" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r1-name" value="株式会社みどり商事" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="376" y="360" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r1-staff" value="佐藤 花子" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="636" y="360" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r1-updated" value="2026/10/20" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="776" y="360" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r1-action" value="編集" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#2563EB;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="896" y="360" width="88" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r2-code" value="C-0002" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="256" y="400" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r2-name" value="青空物産株式会社" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="376" y="400" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r2-staff" value="鈴木 一郎" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="636" y="400" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r2-updated" value="2026/10/18" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="776" y="400" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r2-action" value="編集" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#2563EB;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="896" y="400" width="88" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r3-code" value="C-0003" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="256" y="440" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r3-name" value="有限会社さくら工房" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="376" y="440" width="260" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r3-staff" value="高橋 美咲" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="636" y="440" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r3-updated" value="2026/10/12" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="776" y="440" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="list-r3-action" value="編集" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#2563EB;fontSize=12;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="896" y="440" width="88" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- 注記: 未確定の表示欄 -->
+        <mxCell id="list-draft" value="画面イメージ(デザインは未確定)" style="rounded=1;absoluteArcSize=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E8590C;dashed=1;fontColor=#E8590C;fontSize=12;fontStyle=1;" vertex="1" parent="list-note">
+          <mxGeometry x="1060" y="13" width="240" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- 注記: 確認したい点 -->
+        <mxCell id="list-badge1" value="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E8590C;strokeColor=#FFFFFF;strokeWidth=2;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" vertex="1" parent="list-note">
+          <mxGeometry x="484" y="168" width="22" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="list-note1" value="1. 顧客名は部分一致で検索しますか?" style="rounded=1;absoluteArcSize=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#E8590C;fontColor=#7C2D12;fontSize=12;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" vertex="1" parent="list-note">
+          <mxGeometry x="1060" y="168" width="240" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="list-badge2" value="2" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E8590C;strokeColor=#FFFFFF;strokeWidth=2;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" vertex="1" parent="list-note">
+          <mxGeometry x="972" y="314" width="22" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="list-note2" value="2. 削除もこの一覧から行いますか?" style="rounded=1;absoluteArcSize=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#E8590C;fontColor=#7C2D12;fontSize=12;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" vertex="1" parent="list-note">
+          <mxGeometry x="1060" y="314" width="240" height="48" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="form" name="顧客登録">
+    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1320" pageHeight="680" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" value="画面" parent="0" />
+        <mxCell id="form-note" value="注記" parent="0" />
+
+        <!-- ページの背景(注記の余白が透けないようにする) -->
+        <mxCell id="form-page-bg" value="" style="rounded=0;html=1;fillColor=#FFFFFF;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1320" height="680" as="geometry" />
+        </mxCell>
+
+        <!-- 画面の骨格 -->
+        <mxCell id="form-bg" value="" style="rounded=0;html=1;fillColor=#F5F7FA;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1040" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="form-header" value="顧客管理システム" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;fontColor=#1F2937;fontSize=16;fontStyle=1;align=left;spacingLeft=16;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1040" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="form-header-user" value="山田 太郎" style="text;html=1;fontColor=#6B7280;fontSize=13;align=right;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="880" y="13" width="140" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- サイドメニュー -->
+        <mxCell id="form-sidebar" value="" style="rounded=0;html=1;fillColor=#1E293B;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="0" y="56" width="200" height="624" as="geometry" />
+        </mxCell>
+        <mxCell id="form-menu1" value="ダッシュボード" style="text;html=1;fontColor=#CBD5E1;fontSize=13;align=left;verticalAlign=middle;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="0" y="72" width="200" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="form-menu2" value="顧客一覧" style="text;html=1;fontColor=#CBD5E1;fontSize=13;align=left;verticalAlign=middle;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="0" y="112" width="200" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="form-menu3" value="顧客登録" style="rounded=0;html=1;fillColor=#2563EB;strokeColor=none;fontColor=#FFFFFF;fontSize=13;align=left;verticalAlign=middle;spacingLeft=20;" vertex="1" parent="1">
+          <mxGeometry x="0" y="152" width="200" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- 画面タイトル -->
+        <mxCell id="form-title" value="顧客登録" style="text;html=1;fontColor=#1F2937;fontSize=20;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="232" y="72" width="300" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- 基本情報のカード -->
+        <mxCell id="form-card-basic" value="基本情報" style="rounded=1;absoluteArcSize=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E5E7EB;shadow=1;fontColor=#1F2937;fontSize=14;fontStyle=1;align=left;verticalAlign=top;spacingLeft=16;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="232" y="120" width="776" height="536" as="geometry" />
+        </mxCell>
+
+        <!-- 入力項目 -->
+        <mxCell id="form-label-code" value="顧客コード" style="text;html=1;fontColor=#374151;fontSize=12;align=left;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="256" y="156" width="360" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="form-input-code" value="登録後に自動で表示されます" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#9CA3AF;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="256" y="180" width="360" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="form-label-staff" value="担当者" style="text;html=1;fontColor=#374151;fontSize=12;align=left;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="636" y="156" width="348" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="form-select-staff" value="佐藤 花子" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#1F2937;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="636" y="180" width="348" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="form-select-staff-arrow" value="" style="triangle;direction=south;html=1;fillColor=#6B7280;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="960" y="195" width="10" height="6" as="geometry" />
+        </mxCell>
+        <mxCell id="form-label-name" value="顧客名(必須)" style="text;html=1;fontColor=#374151;fontSize=12;align=left;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="256" y="236" width="360" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="form-input-name" value="例: 株式会社サンプル" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#9CA3AF;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="256" y="260" width="360" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="form-label-kana" value="顧客名カナ(必須)" style="text;html=1;fontColor=#374151;fontSize=12;align=left;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="636" y="236" width="348" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="form-input-kana" value="例: カブシキガイシャサンプル" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#9CA3AF;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="636" y="260" width="348" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="form-label-tel" value="電話番号" style="text;html=1;fontColor=#374151;fontSize=12;align=left;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="256" y="316" width="360" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="form-input-tel" value="例: 03-1234-5678" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#9CA3AF;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="256" y="340" width="360" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="form-label-mail" value="メールアドレス" style="text;html=1;fontColor=#374151;fontSize=12;align=left;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="636" y="316" width="348" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="form-input-mail" value="例: info@example.com" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#9CA3AF;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="636" y="340" width="348" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="form-label-address" value="住所" style="text;html=1;fontColor=#374151;fontSize=12;align=left;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="256" y="396" width="728" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="form-input-address" value="例: 東京都千代田区丸の内1-1-1" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#9CA3AF;fontSize=13;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="256" y="420" width="728" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="form-label-memo" value="備考" style="text;html=1;fontColor=#374151;fontSize=12;align=left;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry x="256" y="476" width="728" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="form-textarea-memo" value="取引条件や連絡時の注意点など" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#9CA3AF;fontSize=13;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="256" y="500" width="728" height="72" as="geometry" />
+        </mxCell>
+
+        <!-- 操作ボタン -->
+        <mxCell id="form-btn-cancel" value="キャンセル" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#374151;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="796" y="600" width="88" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="form-btn-save" value="登録" style="rounded=1;absoluteArcSize=1;arcSize=6;whiteSpace=wrap;html=1;fillColor=#2563EB;strokeColor=#2563EB;fontColor=#FFFFFF;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="896" y="600" width="88" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- 注記: 未確定の表示欄 -->
+        <mxCell id="form-draft" value="画面イメージ(デザインは未確定)" style="rounded=1;absoluteArcSize=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#E8590C;dashed=1;fontColor=#E8590C;fontSize=12;fontStyle=1;" vertex="1" parent="form-note">
+          <mxGeometry x="1060" y="13" width="240" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- 注記: 確認したい点 -->
+        <mxCell id="form-badge3" value="3" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E8590C;strokeColor=#FFFFFF;strokeWidth=2;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" vertex="1" parent="form-note">
+          <mxGeometry x="604" y="168" width="22" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="form-note3" value="3. 顧客コードは自動で採番しますか?" style="rounded=1;absoluteArcSize=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#E8590C;fontColor=#7C2D12;fontSize=12;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" vertex="1" parent="form-note">
+          <mxGeometry x="1060" y="168" width="240" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="form-badge4" value="4" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E8590C;strokeColor=#FFFFFF;strokeWidth=2;fontColor=#FFFFFF;fontSize=11;fontStyle=1;" vertex="1" parent="form-note">
+          <mxGeometry x="972" y="168" width="22" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="form-note4" value="4. 担当者は複数選べますか?" style="rounded=1;absoluteArcSize=1;arcSize=4;whiteSpace=wrap;html=1;fillColor=#FFF4E5;strokeColor=#E8590C;fontColor=#7C2D12;fontSize=12;align=left;verticalAlign=top;spacingLeft=8;spacingTop=6;" vertex="1" parent="form-note">
+          <mxGeometry x="1060" y="232" width="240" height="48" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
