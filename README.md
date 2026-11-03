@@ -67,6 +67,30 @@ READMEはソフトウェア開発向けと業務改善向けで構成を変え�
 テンプレートは[`skills/project-docs/assets/`](skills/project-docs/assets/)、  
 収集手順は[`skills/project-docs/references/`](skills/project-docs/references/)に記載しています。
 
+### project-policy (アルファ版)
+
+> 本スキルはアルファ版です。仕様が変わる可能性があります。
+
+プロジェクトのポリシーを「方針」と「基準」で構成して生成し、  
+基準がコード・設定・CIと合っているかを監査します。  
+テスト、セキュリティ、AI利用、ドキュメントなどの種別ごとに論点を用意し、  
+種別固有のテンプレートがないポリシーは汎用テンプレートで草案を作ります。
+
+読み込みのトリガーは次のとおりです。
+
+- `テストポリシーを作って`と依頼したとき
+- `新規ポリシーを作って`と依頼したとき
+- `ポリシーを監査して`や`ポリシーを見直して`と依頼したとき
+
+ポリシーかどうかは、記述が方針と基準で構成されているかで判定します。  
+手順書や運用ルールの作成は対象外です。  
+出力先は指定がなければ`docs/`とし、既存ファイルがある場合は差分を示して承認を得てから更新します。  
+監査では、基準ごとに「一致」「乖離」「手段未定義」「対象外」の4つに分類して報告します。
+
+スキルの仕様は[`skills/project-policy/SKILL.md`](skills/project-policy/SKILL.md)に、  
+テンプレートは[`skills/project-policy/assets/`](skills/project-policy/assets/)、  
+種別カタログや監査手順は[`skills/project-policy/references/`](skills/project-policy/references/)に記載しています。
+
 ### handoff
 
 進行中の作業の進捗・未決事項・課題をMarkdown形式で構造化し、  
@@ -269,6 +293,8 @@ npx skills add wate/agent-skills --agent claude-code
 - `drawioで業務フロー図を作って`
 - `READMEを作って`
 - `技術スタックを更新して`
+- `テストポリシーを作って`
+- `ポリシーを監査して`
 - `これを記憶しておいて`
 
 チャット入力欄でスラッシュコマンドを入力すると、明示的に呼び出せます。
@@ -282,6 +308,7 @@ npx skills add wate/agent-skills --agent claude-code
 - `/drawio`
 - `/project-overview`
 - `/project-docs`
+- `/project-policy`
 - `/feedback`
 
 ライセンス
