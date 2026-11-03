@@ -41,7 +41,8 @@ SessionStartフックによる強制注入に対応しています。
 node .agents/skills/feedback/scripts/vscode-copilot/setup-hook.mjs
 ```
 
-- `assets/vscode-copilot/hooks/feedback.json`をひな形とし、コマンドのパスをスキルの実際の配置から生成して`.github/hooks/feedback.json`へ書き出します
+- `assets/vscode-copilot/hooks/feedback.json`をひな形とし、`.github/hooks/feedback.json`へ書き出します
+    - コマンドのパスは、スキルの実際の配置から生成します
     - `.agents/skills/`や`.claude/skills/`へ配置した場合も、実在するパスを指すフック定義になります
 - 同じ内容が登録済みの場合は、変更しません
 - 内容の異なる`.github/hooks/feedback.json`が存在する場合は、差分を表示して中止します(上書きしません)
@@ -67,7 +68,7 @@ VS Code Copilot Chatで`feedback`スキルがメモリを保存すると、ス�
 
 `.github/feedback/index.md`がある状態で、Copilot Chatの新しいセッションを開始します。
 「セッション開始時に受け取った記憶索引の項目名を挙げてください」と尋ね、`index.md`の項目が挙がるかを確認します。
-注入されない場合は、`.github/hooks/feedback.json`のコマンドが指すファイルが実在するかを確認します。
+注入されない場合は、`.github/hooks/feedback.json`のコマンドの指すファイルが実在するかを確認します。
 
 ### 手動で登録する場合
 
@@ -79,28 +80,29 @@ opencode
 -------------------------
 
 opencodeには、ファイルの内容をコンテキストへ自動注入する2つの機構があります。
-優先して使うのは方式1の`instructions`設定です。
+v2のドキュメントは`opencode.ai/v2/docs/`にあります。
 
-### 方式1: instructions設定(安定機構・推奨)
+### 方式1: instructions設定
 
-`opencode.jsonc`または`opencode.json`の`instructions`は、ファイルまたはglobの配列を指定する安定した設定です。
-`experimental`配下には属さず、`experimental.policies`や`experimental.session.compacting`等の実験的機能と同等に扱われていません。
-指定されたファイルの内容は、`AGENTS.md`の読み込みと同様にモデルへ読み込みます。
+`opencode.jsonc`または`opencode.json`の`instructions`は、注入するファイルを配列で指定する設定です。
+指定したファイルの内容は、`AGENTS.md`の後に、書いた順で読み込まれます。
 
-- 公式スキーマ`opencode.ai/config.json`の`Config`定義で、`instructions`はトップレベルの配列プロパティとして確認済みです。
-- 公式ドキュメント[rules](https://opencode.ai/docs/rules/)に、次の記載があります。
-  > All instruction files are combined with your `AGENTS.md` files
+- 出典: [v2のInstructions](https://opencode.ai/v2/docs/instructions/)の「Configuration」
+- 指定できる形式は、相対パス・glob・`~/`始まりのパス・絶対パス・HTTP(S)のURLです
+- 相対パスは、ワークスペースからプロジェクトルートまでの各ディレクトリで探します
 - 記述例
 
 ```jsonc
 {
+  "$schema": "https://opencode.ai/config.json",
   "instructions": [".github/feedback/index.md"]
 }
 ```
 
-この方式はAGENTS.md方式(AGENTS.mdの文中で「index.mdを確認せよ」と指し送りする方式)と区別されます。
+この方式はAGENTS.md方式(AGENTS.mdの文中で`index.md`の確認を指示する方式)と区別されます。
 AGENTS.md方式は指し送り先自体がコンテキストへ入らないため、AIが自発的に読まない限り注入されません。
-`instructions`設定はファイル内容そのものを毎ターン読み込ませるため、注入の自動化としては確実です。
+`instructions`設定はファイル内容そのものを読み込ませるため、注入の自動化としては確実です。
+v2では、ファイルを変更すると、次のモデルへのリクエストの前に変更が反映されます。
 
 #### 登録手順
 
@@ -112,59 +114,70 @@ AGENTS.md方式は指し送り先自体がコンテキストへ入らないた�
 node .agents/skills/feedback/scripts/opencode/setup-instructions.mjs
 ```
 
-- 設定ファイルが存在しない場合は、`opencode.jsonc`を新規作成します
-- `opencode.jsonc`が存在する場合は、そのファイルの`instructions`配列へ`.github/feedback/index.md`を追記します(登録済みなら変更なし)
-- `opencode.jsonc`がなく`opencode.json`のみ存在する場合は、`opencode.json`を更新します
+- 設定ファイルを、ルート直下の`opencode.jsonc`・`opencode.json`、`.opencode/`配下の`opencode.jsonc`・`opencode.json`の順で探します
+    - 最初に見つかったファイルの`instructions`配列へ、`.github/feedback/index.md`を追記します(登録済みなら変更なし)
+- 設定ファイルがどこにもない場合は、ルート直下に`$schema`付きの`opencode.jsonc`を新規作成します
 - 既存ファイルへ追記する際は、コメントを保持したまま挿入します
 - `--root <ディレクトリ>`で対象プロジェクトを指定できます。省略した場合はカレントディレクトリを対象にします
 
-opencodeはプロジェクト設定として`opencode.jsonc`を`opencode.json`より優先します。
-同一ディレクトリに両方がある場合はどちらも読み込まれ、競合するキーは`opencode.jsonc`が優先されます。
+v2のプロジェクト設定は、ルート直下と`.opencode/`配下の2か所に置けます。
+両方ある場合は、ルート直下の設定の後に`.opencode/`配下の設定をマージするため、`.opencode/`側が優先されます。
+出典は[v2のConfig](https://opencode.ai/v2/docs/config/)の「Locations」です。
 
 登録後は、opencodeを再起動して設定を読み込ませます。
 
 #### 備考
 
-`instructions`の内容は`AGENTS.md`と併合されます、優先順位による上書きは発生しません。
-`opencode.jsonc`または`opencode.json`がグローバルとプロジェクトの両方にある場合も、
-`instructions`は上書きではなく重複を除いた和集合でマージされます。
-実装では、`AGENTS.md`系ファイルと`instructions`の解決結果が1つの配列にまとめられます。
-該当箇所は[packages/opencode/src/session/instruction.ts](https://github.com/anomalyco/opencode/blob/main/packages/opencode/src/session/instruction.ts)の`system`関数です。
+`instructions`の内容は`AGENTS.md`と結合されます。優先順位による上書きは発生しません。
+グローバルとプロジェクトの両方に設定がある場合も、各設定の`instructions`は結合されます。
+実装は[packages/core/src/config/plugin/instruction.ts](https://github.com/anomalyco/opencode/blob/dev/packages/core/src/config/plugin/instruction.ts)にあります。
+
+v2が認識する指示ファイルは`AGENTS.md`だけです。`CLAUDE.md`へのフォールバックはありません。
 
 指定したファイルが存在しない場合、そのエントリはエラーを出さずにスキップされます。
-読み込みに失敗した結果は空として扱われ、注入対象から除外されるためです。
-パスの誤りも無言で見逃されるため、導入時は注入が効いているかの確認を推奨します。
+パスの誤りも無言で見逃されるため、導入時は注入が効いているかを確認します。
+確認には、1回だけ質問して終了する`opencode run`を使えます。
 
-### 方式2: experimentalフック(補足)
-
-[プラグイン機構](https://opencode.ai/docs/plugins/)(`.opencode/plugins/`配下にJS/TSモジュールを配置)で、より動的な制御が可能です。
-
-汎用`event`フック(`session.created`など)は通知専用で、出力パラメータを持たずコンテキストへは注入できません。
-[packages/plugin/src/index.ts](https://github.com/anomalyco/opencode/blob/main/packages/plugin/src/index.ts)の`event`フックの型は
-`(input: { event: Event }) => Promise<void>`です。
-
-コンテキスト注入に対応するのは`experimental.chat.system.transform`フックです。
-
-- 型定義は`packages/plugin/src/index.ts`にあります。
-
-```typescript
-"experimental.chat.system.transform"?: (
-  input: { sessionID?: string; model: Model },
-  output: { system: string[] }
-) => Promise<void>
+```sh
+opencode run "セッション開始時に受け取った記憶索引の項目名を挙げてください"
 ```
 
-- 呼び出し箇所: [packages/opencode/src/session/llm/request.ts](https://github.com/anomalyco/opencode/blob/main/packages/opencode/src/session/llm/request.ts)の`prepare`関数内
-    - `output.system`配列へpushした文字列が、そのままLLMへ送るシステムプロンプトに追加される
-- 発火タイミング: セッション開始時1回ではなく、LLMへのリクエストのたび(毎ターン)に呼ばれる
+### 方式2: プラグインのcontextフック
 
-`experimental.`が付くため仕様の不安定性があります。
-静的なファイル注入で足りる場合は方式1に留めます。
-動的な注入条件(エントリ単位でフィルタする等)が必要な場合のみ方式2を使います。
+[プラグイン機構](https://opencode.ai/v2/docs/build/plugins/)で、より動的な制御が可能です。
+v2のプラグインは、`Plugin.define({ id, setup })`をdefault exportするモジュールです。
+ローカルのプラグインは`.opencode/plugins/`配下に置きます。
+v1のプラグインはv2で動きません。
+
+コンテキスト注入に対応するのは、`ctx.session.hook("context")`です。
+v1の`experimental.chat.system.transform`の移行先に当たります。
+
+```typescript
+import { Plugin } from "@opencode/plugin"
+
+export default Plugin.define({
+  id: "example.context",
+  async setup(ctx) {
+    await ctx.session.hook("context", (event) => {
+      event.system.push({ type: "text", text: "..." })
+    })
+  },
+})
+```
+
+- 「Migrate request hooks」の出典: [v2のMigrate plugins from V1](https://opencode.ai/v2/docs/build/plugins/migrate-v1)
+- 発火タイミング: プロバイダーへ送る直前に呼ばれます
+    - 「Runtime Hooks」の出典: [packages/plugin/src/README.md](https://github.com/anomalyco/opencode/blob/dev/packages/plugin/src/README.md)
+- `context`には`experimental.`の接頭辞がありません。v1の`experimental.chat.system.transform`とは扱いが異なります
+- プラグインは、opencodeのリリースに合う`@opencode/plugin`の版に依存させます
+
+静的なファイル注入だけなら方式1で足ります。
+方式2は、項目単位で絞るなどの動的な注入条件を扱えます。
+方式1と方式2の両方で同じ索引を登録すると、索引が2回注入されます。
 
 ### メモリ注入への適用
 
-方式1・方式2のどちらでも、対象ファイルを直接指すとその全内容が毎ターンコンテキストへ加わります。
+方式1・方式2のどちらでも、対象ファイルを直接指すとその全内容がコンテキストへ加わります。
 エントリが増えるほどトークン消費が大きくなります。
 このため、注入対象は索引(要約)とし、全文はAIが必要時に読み込む2段引きを維持します。
 

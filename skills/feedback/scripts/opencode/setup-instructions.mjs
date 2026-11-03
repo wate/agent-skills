@@ -10,6 +10,7 @@
  * - ファイルが存在しない場合: `opencode.jsonc`を新規作成する
  * - `opencode.jsonc`が存在する場合: そのファイルへ追記する(登録済みなら変更しない)
  * - `opencode.json`のみ存在する場合: そのファイルへ追記する
+ * - ルート直下になく`.opencode/`配下にのみ存在する場合: そのファイルへ追記する
  *
  * 既存ファイルへはコメントを保持したまま挿入するため、文字列とコメントを考慮した
  * 位置探索で挿入位置を求めます。シェルコマンドを実行しないため、zxではなくNode.js標準モジュールで実装しています。
@@ -26,6 +27,9 @@ import process from 'node:process';
 /** 設定ファイルのファイル名(優先順位順) */
 const CONFIG_FILENAMES = ['opencode.jsonc', 'opencode.json'];
 
+/** 設定ファイルを探すディレクトリ(プロジェクトルート相対、探索順) */
+const CONFIG_DIRECTORIES = ['.', '.opencode'];
+
 /** 新規作成する設定ファイルのファイル名 */
 const DEFAULT_CONFIG_FILENAME = CONFIG_FILENAMES[0];
 
@@ -34,6 +38,7 @@ const INSTRUCTION_PATH = '.github/feedback/index.md';
 
 /** 新規作成する設定ファイルの内容(ドキュメントの記述例に対応) */
 const INITIAL_CONFIG_CONTENT = `{
+  "$schema": "https://opencode.ai/config.json",
   "instructions": ["${INSTRUCTION_PATH}"]
 }
 `;
@@ -57,6 +62,7 @@ opencode用 instructions設定セットアップスクリプト
 動作:
   ${DEFAULT_CONFIG_FILENAME}が存在しない場合、${INSTRUCTION_PATH}をinstructionsへ登録した設定を新規作成します。
   ${CONFIG_FILENAMES.join(' / ')}が存在する場合、instructions配列へ追記します(登録済みなら変更なし)。
+  ルート直下になく .opencode/ 配下にのみ存在する場合は、そのファイルへ追記します。
   既存ファイルへ追記する際は、コメントを保持したまま挿入します。
 `);
 }
@@ -275,13 +281,18 @@ function insertInstructionsProperty(text, config, openBrace) {
 /**
  * 更新または作成する設定ファイルのパスを決定します。
  *
+ * ルート直下を先に探し、なければ`.opencode/`配下を探します。
+ * どちらにもない場合は、ルート直下へ新規作成するパスを返します。
+ *
  * @param {string} projectRoot プロジェクトルートの絶対パス
  * @returns {string} 設定ファイルのパス
  */
 function resolveConfigPath(projectRoot) {
-  for (const filename of CONFIG_FILENAMES) {
-    const candidate = path.join(projectRoot, filename);
-    if (existsSync(candidate)) return candidate;
+  for (const directory of CONFIG_DIRECTORIES) {
+    for (const filename of CONFIG_FILENAMES) {
+      const candidate = path.join(projectRoot, directory, filename);
+      if (existsSync(candidate)) return candidate;
+    }
   }
   return path.join(projectRoot, DEFAULT_CONFIG_FILENAME);
 }
@@ -345,8 +356,9 @@ function main(projectRoot) {
     return;
   }
 
-  if (path.basename(configPath) !== DEFAULT_CONFIG_FILENAME) {
-    console.log(`注意: ${DEFAULT_CONFIG_FILENAME} がないため ${path.basename(configPath)} を更新します。`);
+  const relativeConfigPath = path.relative(projectRoot, configPath);
+  if (relativeConfigPath !== DEFAULT_CONFIG_FILENAME) {
+    console.log(`注意: ${DEFAULT_CONFIG_FILENAME} がないため ${relativeConfigPath} を更新します。`);
   }
   updateConfig(configPath);
 }
