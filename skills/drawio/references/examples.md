@@ -1,5 +1,5 @@
 draw.io XML実装例とサンプルコード
-=========================
+=================================
 
 シンプルなフロー図
 -------------------------
@@ -45,16 +45,17 @@ draw.io XML実装例とサンプルコード
 
 ### ポイント
 
-- ノード間隔: Y座標で150単位の間隔(100→250)を確保
+- ノード間隔: Y座標で150単位の間隔(100->250)を確保
 - カラー: 開始ノードは緑系、終了ノードは赤系
 - エッジスタイル: `orthogonalEdgeStyle`で直角線を使用
 
-ビジネスプロセス図
+グループ化したフロー図
 -------------------------
 
 ### 概要
 
-グループ化とサブプロセスを含むビジネスプロセス図の例です。
+グループ化とサブプロセスを含むフロー図の例です。
+業務フロー図(役割や部門ごとの業務の流れ)は、この例を使わず、[スイムレーン図の生成](swimlane.md)の手順とサンプルに従って描きます。
 
 ### XMLコード
 
@@ -255,94 +256,8 @@ draw.io XML実装例とサンプルコード
 ER図
 -------------------------
 
-### 概要
-
-2つのエンティティとリレーションを持つER図の例です。
-
-### XMLコード
-
-```xml
-<mxfile host="app.diagrams.net" modified="2026-02-01T00:00:00.000Z" agent="AI" etag="er-basic-001">
-  <diagram id="er-basic" name="ER図">
-    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1"
-                  page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
-      <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
-
-        <!-- エンティティ: 顧客 -->
-        <mxCell id="entity-customer" value="顧客"
-                style="shape=mxgraph.er.entity;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1"
-                parent="1">
-          <mxGeometry x="120" y="180" width="140" height="70" as="geometry"/>
-        </mxCell>
-
-        <!-- 属性: 顧客ID -->
-        <mxCell id="attr-customer-id" value="顧客ID"
-                style="shape=mxgraph.er.attribute;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6c8ebf;"
-                vertex="1" parent="1">
-          <mxGeometry x="120" y="80" width="120" height="50" as="geometry"/>
-        </mxCell>
-
-        <!-- エンティティ: 注文 -->
-        <mxCell id="entity-order" value="注文"
-                style="shape=mxgraph.er.entity;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1"
-                parent="1">
-          <mxGeometry x="520" y="180" width="140" height="70" as="geometry"/>
-        </mxCell>
-
-        <!-- 属性: 注文ID -->
-        <mxCell id="attr-order-id" value="注文ID"
-                style="shape=mxgraph.er.attribute;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;"
-                vertex="1" parent="1">
-          <mxGeometry x="520" y="80" width="120" height="50" as="geometry"/>
-        </mxCell>
-
-        <!-- リレーション: 注文を持つ -->
-        <mxCell id="relation-has" value="注文を持つ"
-                style="shape=mxgraph.er.has;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1"
-                parent="1">
-          <mxGeometry x="320" y="180" width="140" height="70" as="geometry"/>
-        </mxCell>
-
-        <!-- エッジ: 顧客ID→顧客 -->
-        <mxCell id="edge-attr-customer"
-                style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1"
-                parent="1" source="attr-customer-id" target="entity-customer">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- エッジ: 注文ID→注文 -->
-        <mxCell id="edge-attr-order"
-                style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1"
-                parent="1" source="attr-order-id" target="entity-order">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- エッジ: 顧客→リレーション -->
-        <mxCell id="edge-customer-has"
-                style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1"
-                parent="1" source="entity-customer" target="relation-has">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- エッジ: リレーション→注文 -->
-        <mxCell id="edge-has-order"
-                style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1"
-                parent="1" source="relation-has" target="entity-order">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-</mxfile>
-```
-
-### ポイント
-
-- エンティティ: `mxgraph.er.entity`で表現しています。
-- 属性: `mxgraph.er.attribute`で表現しています。
-- リレーション: `mxgraph.er.has`で表現しています。
+ER図は、この一覧の例を使いません。
+[ER図の生成](er-diagram.md)の手順と、[ER図のサンプル](../assets/er_diagram_example.drawio)に従って描きます。
 
 システム構成図
 -------------------------
@@ -529,7 +444,7 @@ ER図
 ```
 
 よくあるパターンと推奨事項
--------------------------
+--------------------------
 
 ### ID命名規則
 
@@ -539,13 +454,13 @@ ER図
 
 ### スタイル指定の順序
 
-推奨される属性の記述順序:
+属性は、次の順に書くことを推奨します。
 
 1. 図形タイプ(`rounded`, `shape`, `rhombus`など)
 2. レイアウト(`whiteSpace`, `html`)
 3. 色(`fillColor`, `strokeColor`)
 4. 線(`strokeWidth`, `dashed`)
-5. テキスト(`fontColor`, `fontSize`, `fontStyle`, `align`, `verticalAlign`)
+5. テキスト(`fontColor`・`fontSize`・`fontStyle`・`align`・`verticalAlign`)
 6. その他(`shadow`など)
 
 ### 座標系とグリッド

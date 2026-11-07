@@ -60,7 +60,7 @@
         </mxCell>
 
         <!-- 終了ノード -->
-        <mxCell id="end" value="出荷完了" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="quality-lane">
+        <mxCell id="end" value="出荷完了" style="ellipse;shape=doubleEllipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" vertex="1" parent="quality-lane">
           <mxGeometry x="1040" y="80" width="100" height="60" as="geometry" />
         </mxCell>
 
@@ -74,7 +74,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="sales-decision" target="sales-process2">
+        <mxCell id="arrow3" value="承認" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="sales-decision" target="sales-process2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
@@ -95,12 +95,12 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <mxCell id="arrow8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="quality-decision" target="end">
+        <mxCell id="arrow8" value="合格" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="quality-decision" target="end">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
         <!-- 否認時のフィードバック矢印 -->
-        <mxCell id="arrow-reject" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=1;entryX=0.5;entryY=1;strokeColor=#d6b656;dashed=1;" edge="1" parent="1" source="sales-decision" target="sales-process1">
+        <mxCell id="arrow-reject" value="否認" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;exitX=0;exitY=1;entryX=0.5;entryY=1;strokeColor=#d6b656;dashed=1;" edge="1" parent="1" source="sales-decision" target="sales-process1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="410" y="200" />
@@ -110,30 +110,8 @@
         </mxCell>
 
         <!-- 品質NG時のフィードバック矢印 -->
-        <mxCell id="arrow-quality-ng" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=0;exitY=1;entryX=0.5;entryY=1;strokeColor=#b85450;dashed=1;" edge="1" parent="1" source="quality-decision" target="production-process2">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="920" y="720" />
-              <mxPoint x="770" y="720" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-
-        <!-- ラベル -->
-        <mxCell id="label-yes1" value="承認" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="480" y="140" width="40" height="20" as="geometry" />
-        </mxCell>
-
-        <mxCell id="label-no1" value="否認" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="350" y="190" width="40" height="20" as="geometry" />
-        </mxCell>
-
-        <mxCell id="label-yes2" value="合格" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="980" y="620" width="40" height="20" as="geometry" />
-        </mxCell>
-
-        <mxCell id="label-no2" value="不合格" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="860" y="700" width="50" height="20" as="geometry" />
+        <mxCell id="arrow-quality-ng" value="不合格" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;fontSize=10;exitX=0.5;exitY=0;entryX=1;entryY=0.5;strokeColor=#b85450;dashed=1;" edge="1" parent="1" source="quality-decision" target="production-process2">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
