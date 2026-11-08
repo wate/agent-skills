@@ -31,8 +31,8 @@ npx skills add wate/agent-skills --skill handoff --skill workplan
 # 全プロジェクトで使えるようにインストールする
 npx skills add wate/agent-skills --global
 
-# 対象エージェントを指定してインストールする
-npx skills add wate/agent-skills --agent claude-code
+# GitHub Copilotへプロジェクト単位でインストールする
+npx skills add wate/agent-skills --agent github-copilot
 ```
 
 対話形式では、配置先(プロジェクトまたは個人)と方式(シンボリックリンクまたはコピー)を選択します。  
