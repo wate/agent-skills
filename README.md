@@ -63,6 +63,9 @@ npx skills add wate/agent-skills --agent github-copilot
 - `drawioで業務フロー図を作って`
 - `READMEを作って`
 - `技術スタックを更新して`
+- `テストポリシーを作って`
+- `ガイドラインを作って`
+- `用語集を作って`
 - `これを記憶しておいて`
 
 チャット入力欄でスラッシュコマンドを入力すると、明示的に呼び出せます。
@@ -76,6 +79,9 @@ npx skills add wate/agent-skills --agent github-copilot
 - `/drawio`
 - `/project-overview`
 - `/project-docs`
+- `/project-policy`
+- `/project-guideline`
+- `/glossary`
 - `/feedback`
 
 収録スキル
@@ -110,14 +116,15 @@ READMEはソフトウェア開発向けと業務改善向けで構成を変え�
 - `プロジェクトブリーフを更新して`と依頼したとき
 
 設定ファイルや既存文書から確認できた事実だけを書き、推測した内容は「要確認」と明記します。  
-既存文書を更新するときは、生成案との差分を示し、承認を得てから反映します。
+既存文書を更新するときは、手で足された記述を残したまま書き込み、書き込み後に差分で確認してほしい箇所を報告します。  
+用語集がある場合は、用語集の定義と表記に合わせます。
 
 スキルの仕様は[`skills/project-overview/SKILL.md`](skills/project-overview/SKILL.md)に、  
 テンプレートは[`skills/project-overview/assets/`](skills/project-overview/assets/)に記載しています。
 
 ### project-docs
 
-プロジェクトの基準文書として、技術スタック`technology.md`、  
+プロジェクトの基準文書として、技術スタック`technology.md`、システム構成`architecture.md`、  
 ディレクトリ構造`directory_structure.md`、コーディング規約`code_style.md`を作成・更新します。
 
 読み込みのトリガーは次のとおりです。
@@ -127,11 +134,70 @@ READMEはソフトウェア開発向けと業務改善向けで構成を変え�
 - `コーディング規約を作って`と依頼したとき
 
 設定ファイルとディレクトリを事実の起点とし、設定に書かれていないルールや技術は追加しません。  
-依頼で指定された文書だけを更新し、既存文書がある場合は差分を示して承認を得てから反映します。
+依頼で指定された文書だけを更新し、既存文書がある場合は手で足された記述を残したまま書き込み、書き込み後に差分で確認してほしい箇所を報告します。  
+用語集がある場合は、用語集の定義と表記に合わせます。
 
 スキルの仕様は[`skills/project-docs/SKILL.md`](skills/project-docs/SKILL.md)に、  
 テンプレートは[`skills/project-docs/assets/`](skills/project-docs/assets/)、  
 収集手順は[`skills/project-docs/references/`](skills/project-docs/references/)に記載しています。
+
+### project-policy
+
+プロジェクトのポリシーを、方針と基準で作成・更新します。  
+既存の基準が甘い場合は1件ずつ判定して強化し、基準がコード・設定・CIと合っているかを監査します。
+
+読み込みのトリガーは次のとおりです。
+
+- `テストポリシーを作って`と依頼したとき
+- `ポリシーの基準を厳しくして`と依頼したとき
+- `ポリシーを監査して`や`ポリシーを見直して`と依頼したとき
+
+生成・改訂・監査のモードを依頼から決め、判断できない場合は確認して停止します。  
+書き込み前に承認は求めず、書き込み後に差分で確認してほしい箇所を報告します。  
+用語集がある場合は、用語集の定義と表記に合わせます。  
+手順書や運用ルールの作成には使いません。
+
+スキルの仕様は[`skills/project-policy/SKILL.md`](skills/project-policy/SKILL.md)に、  
+テンプレートは[`skills/project-policy/assets/`](skills/project-policy/assets/)、  
+収集・監査の手順は[`skills/project-policy/references/`](skills/project-policy/references/)に記載しています。
+
+### project-guideline
+
+機械では検査できない作り方の取り決め(ガイドライン)を、既存の成果物から下書きして文書にまとめます。  
+区分ごとに、例外のないルールと例外を認めるルールを分けて書きます。
+
+読み込みのトリガーは次のとおりです。
+
+- `ガイドラインを作って`と依頼したとき
+- `テストのガイドラインを作り直して`と依頼したとき
+- `実装の取り決めを文書にしたい`と依頼したとき
+
+書き込む前の承認は求めず、書き込んだ後に差分を確かめるよう利用者へ伝えます。  
+用語集がある場合は、用語集の定義と表記に合わせます。  
+コーディング規約やポリシーの作成には使いません。
+
+スキルの仕様は[`skills/project-guideline/SKILL.md`](skills/project-guideline/SKILL.md)に、  
+テンプレートは[`skills/project-guideline/assets/`](skills/project-guideline/assets/)、  
+書き方の規則は[`skills/project-guideline/references/`](skills/project-guideline/references/)に記載しています。
+
+### glossary
+
+プロジェクトの用語を抽出・分類し、用語集を作成・更新します。  
+定義の長さと項目の数から、一覧型・表型・詳細型のパターンを選びます。
+
+読み込みのトリガーは次のとおりです。
+
+- `用語集を作って`と依頼したとき
+- `用語を整理して`と依頼したとき
+- `用語の定義を更新して`と依頼したとき
+
+内容の追記と定義の更新は、書き込み後に差分で確認します。  
+書式の変換と分類の追加は、対象ごとに承認を得てから行います。  
+用語の定義は用語集を正本とし、他の文書は用語集の表記に合わせます。
+
+スキルの仕様は[`skills/glossary/SKILL.md`](skills/glossary/SKILL.md)に、  
+テンプレートは[`skills/glossary/assets/`](skills/glossary/assets/)、  
+抽出と書式の手順は[`skills/glossary/references/`](skills/glossary/references/)に記載しています。
 
 ### handoff
 
